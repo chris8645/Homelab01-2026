@@ -25,26 +25,66 @@ The infrastructure is being designed with reliability, security, scalability, an
 
 ---
 
-## 🎯 Objectives
+# ✨ Features
 
-- Learn Proxmox virtualization
-- Learn TrueNAS and ZFS storage
-- Learn Docker and containerization
-- Learn Linux system administration
-- Learn networking fundamentals
-- Learn monitoring and observability
-- Learn self-hosting
-- Learn AI deployment using local LLMs
-- Learn infrastructure design and documentation
+- 🖥️ Proxmox VE virtualization
+- 💾 TrueNAS SCALE with ZFS RAIDZ2 storage
+- 🐳 Docker-based application hosting
+- 📸 Immich photo management
+- 🎬 Jellyfin media streaming
+- 🤖 Private multi-user AI (Open WebUI + Ollama)
+- 🔐 Vaultwarden password management
+- 🌐 Pi-hole / AdGuard Home DNS filtering
+- 📊 Grafana & Prometheus monitoring
+- ❤️ Uptime Kuma service monitoring
+- 🏠 Glance dashboard
+- ⚙️ Dockge Docker Compose management
+- 📱 Secure remote access with Tailscale
+- 🎮 Dedicated game server hosting
 
 ---
 
-## 🖥️ Hardware
+# 🎯 Project Goals
+
+This homelab serves two primary purposes.
+
+## 📚 Learning Platform
+
+Gain practical experience with:
+
+- Virtualization
+- Linux administration
+- Docker & containerization
+- Storage systems (ZFS)
+- Networking
+- Infrastructure monitoring
+- Self-hosting
+- AI deployment
+- Infrastructure documentation
+- System administration
+
+## 🏠 Home Infrastructure
+
+Provide reliable self-hosted services for multiple household users including:
+
+- Media streaming
+- Photo backup
+- Password management
+- Network-wide ad blocking
+- Private AI assistants
+- Game servers
+- Remote access
+
+The infrastructure is designed with **reliability, security, scalability, maintainability, and documentation** in mind.
+
+---
+
+# 🖥️ Hardware
 
 | Component | Model |
 |-----------|-------|
 | CPU | AMD Ryzen 5 5600X |
-| GPU | NVIDIA RTX 3060 |
+| GPU | NVIDIA RTX 3060 12GB |
 | RAM | 64GB DDR4 |
 | Motherboard | ASUS TUF Gaming B550M-PLUS WiFi II |
 | Boot Drive | 2TB NVMe SSD |
@@ -54,168 +94,243 @@ The infrastructure is being designed with reliability, security, scalability, an
 
 ---
 
-## 🏗️ Planned Architecture
+# 🏗️ Planned Infrastructure
 
 ```text
                            Internet
                                │
-                            Router
+                           Home Router
                                │
-                          Tailscale VPN
+                        Tailscale VPN
                                │
-                           Proxmox VE
+                          Proxmox VE Host
                                │
-        ┌──────────────────────┼──────────────────────┐
-        │                      │                      │
-    TrueNAS              Docker VM              Game Server VM
-        │                      │                      │
-        │                 ├── Immich          ├── Minecraft
-        │                 ├── Jellyfin        ├── Palworld
-        │                 ├── Vaultwarden     └── More... 
-        │                 ├── Pi-hole         
-        │                 ├── Grafana
-        │                 ├── Prometheus
-        │                 └── Ollama
-        │
-     ZFS RAIDZ2
+        ┌──────────────────────┼────────────────────────┐
+        │                      │                        │
+        │                      │                        │
+   TrueNAS SCALE          Docker VM              Game Server VM
+        │                      │                        │
+   ZFS RAIDZ2 Pool       ├── Glance             ├── Minecraft
+        │                ├── Dockge             ├── Palworld
+        ├── Media         ├── Open WebUI        ├── Satisfactory
+        ├── Photos        ├── Ollama            ├── Project Zomboid*
+        ├── Documents     ├── Jellyfin          └── More...
+        ├── Backups       ├── Immich
+        ├── ISOs          ├── Vaultwarden
+        └── Docker Data   ├── Pi-hole / AdGuard
+                           ├── Grafana
+                           ├── Prometheus
+                           └── Uptime Kuma
 ```
 
 ---
 
-## 📦 Planned Services
-
-The homelab will host several self-hosted services for learning and everyday use.
+# 📦 Planned Services
 
 | Service | Purpose | Status |
 |----------|---------|--------|
 | Proxmox VE | Hypervisor | ⏳ Planned |
 | TrueNAS SCALE | Storage Server | ⏳ Planned |
+| Docker | Container Platform | ⏳ Planned |
+| Dockge | Docker Compose Management | ⏳ Planned |
+| Glance | Homelab Dashboard | ⏳ Planned |
 | Immich | Photo Backup & Management | ⏳ Planned |
 | Jellyfin | Media Streaming | ⏳ Planned |
 | Vaultwarden | Password Manager | ⏳ Planned |
 | Pi-hole / AdGuard Home | DNS Ad Blocking | ⏳ Planned |
 | Grafana | Monitoring Dashboards | ⏳ Planned |
 | Prometheus | Metrics Collection | ⏳ Planned |
-| Ollama | Local AI Models | ⏳ Planned |
+| Uptime Kuma | Service Monitoring | ⏳ Planned |
+| Ollama | Local AI Model Runtime | ⏳ Planned |
+| Open WebUI | Multi-user AI Interface | ⏳ Planned |
 | Tailscale | Secure Remote Access | ⏳ Planned |
-| Game Servers | Multiplayer Game Hosting | ⏳ Planned |
+| Game Servers | Multiplayer Hosting | ⏳ Planned |
 
 ---
 
-## 🎮 Planned Game Servers
+# 🤖 AI Services
 
-Depending on hardware resources and community interest, I plan to host servers for games such as:
+The homelab will host a private AI platform for household users.
+
+### Planned Features
+
+- Multi-user accounts
+- Private chat history for each user
+- Local LLM inference
+- Multiple selectable AI models
+- GPU acceleration
+- Future Retrieval-Augmented Generation (RAG)
+
+Planned software:
+
+- Ollama
+- Open WebUI
+
+---
+
+# 🎮 Planned Game Servers
+
+Depending on available resources, I plan to host servers for games including:
 
 - Minecraft
 - Palworld
 - Satisfactory
-- Subnautica
+- Project Zomboid
+- Valheim *(Future)*
 
 ---
 
-## 📚 Learning Goals
+# 📚 Learning Objectives
 
 Throughout this project I hope to gain practical experience with:
 
+- Linux Administration
 - Virtualization
-- Storage systems (ZFS)
-- Linux administration
-- Docker & Containers
+- Docker
+- Storage Systems (ZFS)
 - Networking
 - Monitoring & Observability
 - Self-hosting
-- AI & Local LLMs
-- Infrastructure Documentation
+- Local AI Deployment
+- Infrastructure Design
+- Documentation
+- Automation
 - System Administration
 
 ---
 
-## 📂 Repository Structure
+# 📂 Repository Structure
 
 ```text
-docs/
-├── hardware.md
-├── storage.md
-├── networking.md
-├── monitoring.md
-└── troubleshooting.md
-
-diagrams/
-docker/
-scripts/
-images/
+.
+├── docs/
+│   ├── hardware.md
+│   ├── storage.md
+│   ├── networking.md
+│   ├── docker.md
+│   ├── ai.md
+│   ├── monitoring.md
+│   ├── backups.md
+│   └── troubleshooting.md
+│
+├── docker/
+│   ├── glance/
+│   ├── dockge/
+│   ├── immich/
+│   ├── jellyfin/
+│   ├── vaultwarden/
+│   ├── open-webui/
+│   ├── ollama/
+│   ├── grafana/
+│   ├── prometheus/
+│   ├── uptime-kuma/
+│   └── pihole/
+│
+├── diagrams/
+├── images/
+├── scripts/
+└── README.md
 ```
 
 ---
 
-## 📝 Project Log
+# 📝 Deployment Roadmap
 
-- [ ] Purchase hardware
+- [ ] Purchase remaining hardware
 - [ ] Assemble server
+- [ ] Update motherboard BIOS
 - [ ] Install Proxmox VE
-- [ ] Configure ZFS RAIDZ2
+- [ ] Configure networking
 - [ ] Deploy TrueNAS SCALE
-- [ ] Configure Docker
-- [ ] Deploy Immich
+- [ ] Configure ZFS RAIDZ2
+- [ ] Create datasets and shares
+- [ ] Deploy Docker VM
+- [ ] Install Docker Engine
+- [ ] Install Dockge
+- [ ] Deploy Glance
 - [ ] Deploy Jellyfin
+- [ ] Deploy Immich
 - [ ] Deploy Vaultwarden
-- [ ] Configure Pi-hole / AdGuard Home
-- [ ] Configure Grafana & Prometheus
+- [ ] Deploy Pi-hole / AdGuard Home
+- [ ] Deploy Prometheus
+- [ ] Deploy Grafana
+- [ ] Deploy Uptime Kuma
 - [ ] Deploy Ollama
-- [ ] Deploy game servers
+- [ ] Deploy Open WebUI
+- [ ] Configure Tailscale
+- [ ] Deploy Game Servers
 - [ ] Configure automated backups
-- [ ] Document the complete infrastructure
+- [ ] Complete documentation
 
 ---
 
-## 🚧 Current Progress
+# 🚧 Current Progress
 
 **Status:** 🟡 Planning
 
-- ✅ Hardware selected
-- 🟡 Purchasing components
-- ⏳ Building server
-- ⏳ Installing Proxmox VE
+| Task | Status |
+|------|--------|
+| Hardware Planning | ✅ Complete |
+| Purchasing Components | 🟡 In Progress |
+| Server Assembly | ⏳ Pending |
+| Software Deployment | ⏳ Pending |
 
 ---
 
-## 🏛️ Design Principles
+# 🏛️ Design Principles
 
-- Reliability for multiple users
-- Data redundancy using ZFS
-- Secure remote access with Tailscale
-- Privacy-focused self-hosted services
+- Reliability over complexity
+- Secure remote access
+- Privacy-focused self-hosting
+- Infrastructure as documentation
 - Centralized monitoring
 - Automated backups
-- Scalable infrastructure
-- Learn by building and documenting
+- Scalable architecture
+- Learn by building
 
 ---
 
-## 🚀 Future Plans
+# 🚀 Future Roadmap
 
 After completing the initial homelab, I plan to explore:
 
 - Kubernetes
-- Infrastructure automation with Ansible
-- Local AI development
-- Advanced monitoring
-- High Availability (HA)
-- Home automation integration
-- Game server automation
-- CI/CD pipelines
+- Ansible
+- Terraform
 - Infrastructure as Code (IaC)
+- CI/CD pipelines
+- Home Assistant integration
+- Advanced monitoring
+- GPU virtualization
+- Retrieval-Augmented Generation (RAG)
+- AI Agents
+- Multi-node Proxmox Cluster
+- High Availability (HA)
 
 ---
 
-## 📌 Notes
+# 📷 Screenshots
 
-This repository is a living project and will continue to evolve as I learn new technologies and improve the infrastructure.
+Coming soon...
 
-All credentials, API keys, private keys, certificates, and sensitive configuration files are excluded from this repository.
+- Proxmox Dashboard
+- TrueNAS Dashboard
+- Glance Homepage
+- Grafana Dashboards
+- Open WebUI
+- Jellyfin
+- Immich
 
 ---
 
-## 📜 License
+# 📌 Notes
+
+This repository is a living project and will continue evolving as I learn new technologies and improve the infrastructure.
+
+Sensitive information—including credentials, API keys, SSH keys, certificates, secrets, and environment variables—is excluded from this repository.
+
+---
+
+# 📜 License
 
 This project is licensed under the MIT License.
