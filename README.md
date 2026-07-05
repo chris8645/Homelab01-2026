@@ -1,6 +1,6 @@
 # 🏠 Homelab01-2026
 
-> Self-hosted homelab built with Proxmox, TrueNAS, Docker, and AI services for learning infrastructure, virtualization, networking, Linux administration, and self-hosting.
+> Self-hosted homelab built with Proxmox, TrueNAS SCALE, Docker, and AI services for learning infrastructure, virtualization, networking, Linux administration, and self-hosting.
 
 ---
 
@@ -14,21 +14,28 @@ The goal of this project is to gain practical experience by designing, deploying
 
 ---
 
-## 🎯 Project Goals
+# 🛠️ Tech Stack
 
-This homelab is designed to serve two purposes:
-
-- A learning platform for virtualization, storage, networking, Linux, Docker, and AI.
-- A self-hosted server providing reliable services for multiple users, including media streaming, photo management, password management, game servers, and AI services.
-
-The infrastructure is being designed with reliability, security, scalability, and maintainability in mind rather than as a single-user lab.
+| Category | Technology |
+|----------|------------|
+| Hypervisor | Proxmox VE |
+| Storage | TrueNAS SCALE + ZFS |
+| Containers | Docker + Dockge |
+| Dashboard | Glance |
+| Monitoring | Grafana + Prometheus + Uptime Kuma |
+| Remote Access | Tailscale |
+| Password Management | Vaultwarden |
+| Media | Jellyfin |
+| Photo Management | Immich |
+| AI | Ollama + Open WebUI |
+| Game Servers | Dedicated VM |
 
 ---
 
 # ✨ Features
 
 - 🖥️ Proxmox VE virtualization
-- 💾 TrueNAS SCALE with ZFS RAIDZ2 storage
+- 💾 TrueNAS SCALE with ZFS Mirror storage
 - 🐳 Docker-based application hosting
 - 📸 Immich photo management
 - 🎬 Jellyfin media streaming
@@ -88,8 +95,8 @@ The infrastructure is designed with **reliability, security, scalability, mainta
 | RAM | 64GB DDR4 |
 | Motherboard | ASUS TUF Gaming B550M-PLUS WiFi II |
 | Boot Drive | 2TB NVMe SSD |
-| Storage | 5 × 12TB SAS HDD *(Planned)* |
-| HBA | LSI 9300-8i (IT Mode) |
+| Storage | 2 × 8TB SATA HDD + 2 × 4TB SATA HDD |
+| Storage Layout | Two ZFS Mirror Pools *(Planned)* |
 | Case | JONSBO N6 |
 
 ---
@@ -110,18 +117,31 @@ The infrastructure is designed with **reliability, security, scalability, mainta
         │                      │                        │
    TrueNAS SCALE          Docker VM              Game Server VM
         │                      │                        │
-   ZFS RAIDZ2 Pool       ├── Glance             ├── Minecraft
+ ZFS Mirror Pools        ├── Glance             ├── Minecraft
         │                ├── Dockge             ├── Palworld
-        ├── Media         ├── Open WebUI        ├── Satisfactory
-        ├── Photos        ├── Ollama            ├── Project Zomboid*
-        ├── Documents     ├── Jellyfin          └── More...
-        ├── Backups       ├── Immich
-        ├── ISOs          ├── Vaultwarden
-        └── Docker Data   ├── Pi-hole / AdGuard
-                           ├── Grafana
-                           ├── Prometheus
-                           └── Uptime Kuma
+        ├── Media        ├── Open WebUI         ├── Satisfactory
+        ├── Photos       ├── Ollama             ├── Project Zomboid
+        ├── Documents    ├── Jellyfin           └── More...
+        ├── Backups      ├── Immich
+        └── ISOs         ├── Vaultwarden
+                          ├── Pi-hole / AdGuard
+                          ├── Grafana
+                          ├── Prometheus
+                          └── Uptime Kuma
 ```
+
+---
+
+# 🏗️ Infrastructure Decisions
+
+The homelab separates storage and compute into dedicated virtual machines.
+
+- Proxmox VE manages virtualization.
+- TrueNAS SCALE provides centralized ZFS storage.
+- Docker hosts all self-contained applications.
+- Game servers run in their own VM.
+- Docker applications and databases run on the NVMe SSD.
+- Media, photos, documents, and backups are stored on mirrored ZFS pools for redundancy and easier management.
 
 ---
 
@@ -129,21 +149,21 @@ The infrastructure is designed with **reliability, security, scalability, mainta
 
 | Service | Purpose | Status |
 |----------|---------|--------|
-| Proxmox VE | Hypervisor | ⏳ Planned |
+| Proxmox VE | Hypervisor | ✅ Installed |
 | TrueNAS SCALE | Storage Server | ⏳ Planned |
 | Docker | Container Platform | ⏳ Planned |
 | Dockge | Docker Compose Management | ⏳ Planned |
-| Glance | Homelab Dashboard | ⏳ Planned |
-| Immich | Photo Backup & Management | ⏳ Planned |
+| Glance | Dashboard | ⏳ Planned |
+| Immich | Photo Management | ⏳ Planned |
 | Jellyfin | Media Streaming | ⏳ Planned |
 | Vaultwarden | Password Manager | ⏳ Planned |
-| Pi-hole / AdGuard Home | DNS Ad Blocking | ⏳ Planned |
-| Grafana | Monitoring Dashboards | ⏳ Planned |
-| Prometheus | Metrics Collection | ⏳ Planned |
+| Pi-hole / AdGuard Home | DNS Filtering | ⏳ Planned |
+| Grafana | Monitoring | ⏳ Planned |
+| Prometheus | Metrics | ⏳ Planned |
 | Uptime Kuma | Service Monitoring | ⏳ Planned |
-| Ollama | Local AI Model Runtime | ⏳ Planned |
-| Open WebUI | Multi-user AI Interface | ⏳ Planned |
-| Tailscale | Secure Remote Access | ⏳ Planned |
+| Ollama | Local LLM Runtime | ⏳ Planned |
+| Open WebUI | AI Interface | ⏳ Planned |
+| Tailscale | Remote Access | ⏳ Planned |
 | Game Servers | Multiplayer Hosting | ⏳ Planned |
 
 ---
@@ -152,16 +172,17 @@ The infrastructure is designed with **reliability, security, scalability, mainta
 
 The homelab will host a private AI platform for household users.
 
-### Planned Features
+Planned features include:
 
 - Multi-user accounts
-- Private chat history for each user
+- Private chat history
 - Local LLM inference
-- Multiple selectable AI models
+- Multiple selectable models
 - GPU acceleration
 - Future Retrieval-Augmented Generation (RAG)
+- AI Agents
 
-Planned software:
+Software:
 
 - Ollama
 - Open WebUI
@@ -169,8 +190,6 @@ Planned software:
 ---
 
 # 🎮 Planned Game Servers
-
-Depending on available resources, I plan to host servers for games including:
 
 - Minecraft
 - Palworld
@@ -180,52 +199,22 @@ Depending on available resources, I plan to host servers for games including:
 
 ---
 
-# 📚 Learning Objectives
-
-Throughout this project I hope to gain practical experience with:
-
-- Linux Administration
-- Virtualization
-- Docker
-- Storage Systems (ZFS)
-- Networking
-- Monitoring & Observability
-- Self-hosting
-- Local AI Deployment
-- Infrastructure Design
-- Documentation
-- Automation
-- System Administration
-
----
-
 # 📂 Repository Structure
 
 ```text
 .
 ├── docs/
-│   ├── hardware.md
-│   ├── storage.md
-│   ├── networking.md
-│   ├── docker.md
-│   ├── ai.md
-│   ├── monitoring.md
-│   ├── backups.md
+│   ├── 01-proxmox-installation.md
+│   ├── 02-truenas.md
+│   ├── 03-docker.md
+│   ├── 04-networking.md
+│   ├── 05-storage.md
+│   ├── 06-monitoring.md
+│   ├── 07-ai.md
+│   ├── 08-game-servers.md
 │   └── troubleshooting.md
 │
 ├── docker/
-│   ├── glance/
-│   ├── dockge/
-│   ├── immich/
-│   ├── jellyfin/
-│   ├── vaultwarden/
-│   ├── open-webui/
-│   ├── ollama/
-│   ├── grafana/
-│   ├── prometheus/
-│   ├── uptime-kuma/
-│   └── pihole/
-│
 ├── diagrams/
 ├── images/
 ├── scripts/
@@ -234,16 +223,32 @@ Throughout this project I hope to gain practical experience with:
 
 ---
 
+# 📖 Documentation
+
+Each deployment includes:
+
+- Installation steps
+- Configuration
+- Network design
+- Storage layout
+- Issues encountered
+- Solutions
+- Lessons learned
+- Future improvements
+
+---
+
 # 📝 Deployment Roadmap
 
-- [ ] Purchase remaining hardware
-- [ ] Assemble server
-- [ ] Update motherboard BIOS
-- [ ] Install Proxmox VE
-- [ ] Configure networking
+- [x] Purchase hardware
+- [x] Assemble server
+- [x] Update motherboard BIOS
+- [x] Install Proxmox VE
+- [x] Configure networking
+- [x] Configure no-subscription repository
 - [ ] Deploy TrueNAS SCALE
-- [ ] Configure ZFS RAIDZ2
-- [ ] Create datasets and shares
+- [ ] Configure ZFS Mirror Pools
+- [ ] Create datasets
 - [ ] Deploy Docker VM
 - [ ] Install Docker Engine
 - [ ] Install Dockge
@@ -266,20 +271,39 @@ Throughout this project I hope to gain practical experience with:
 
 # 🚧 Current Progress
 
-**Status:** 🟡 Planning
+**Status:** 🟡 Building
 
 | Task | Status |
 |------|--------|
 | Hardware Planning | ✅ Complete |
-| Purchasing Components | 🟡 In Progress |
-| Server Assembly | ⏳ Pending |
-| Software Deployment | ⏳ Pending |
+| Hardware Purchased | ✅ Complete |
+| Server Assembly | ✅ Complete |
+| BIOS Updated | ✅ Complete |
+| Proxmox Installed | ✅ Complete |
+| Networking Configured | ✅ Complete |
+| TrueNAS Deployment | ⏳ Pending |
+| Docker Deployment | ⏳ Pending |
+
+---
+
+# 📅 Project Timeline
+
+| Date | Milestone |
+|------|-----------|
+| July 2026 | Hardware planned |
+| July 2026 | Hardware purchased |
+| July 2026 | Server assembled |
+| July 2026 | BIOS updated |
+| July 2026 | Proxmox VE installed |
+| Next | Deploy TrueNAS SCALE |
+| Next | Deploy Docker VM |
 
 ---
 
 # 🏛️ Design Principles
 
 - Reliability over complexity
+- Separate compute and storage
 - Secure remote access
 - Privacy-focused self-hosting
 - Infrastructure as documentation
@@ -292,16 +316,14 @@ Throughout this project I hope to gain practical experience with:
 
 # 🚀 Future Roadmap
 
-After completing the initial homelab, I plan to explore:
-
 - Kubernetes
 - Ansible
 - Terraform
 - Infrastructure as Code (IaC)
-- CI/CD pipelines
-- Home Assistant integration
-- Advanced monitoring
-- GPU virtualization
+- CI/CD Pipelines
+- Home Assistant
+- Advanced Monitoring
+- GPU Virtualization
 - Retrieval-Augmented Generation (RAG)
 - AI Agents
 - Multi-node Proxmox Cluster
@@ -315,6 +337,7 @@ Coming soon...
 
 - Proxmox Dashboard
 - TrueNAS Dashboard
+- Docker Dashboard
 - Glance Homepage
 - Grafana Dashboards
 - Open WebUI
