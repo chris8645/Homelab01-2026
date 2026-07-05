@@ -1,10 +1,10 @@
-# 01 - Proxmox Installation
+# 01 - Proxmox VE Installation & Initial Configuration
 
 ## Overview
 
-The first phase of this project was deploying Proxmox VE as the virtualization platform for the homelab.
+The first phase of the homelab focused on deploying Proxmox VE as the virtualization platform that will host all virtual machines and services.
 
-This provides the foundation for hosting virtual machines including TrueNAS SCALE, Docker, and future game server workloads.
+The goal was to prepare a stable virtualization environment before deploying TrueNAS SCALE, Docker, AI services, and game servers.
 
 ---
 
@@ -18,48 +18,75 @@ This provides the foundation for hosting virtual machines including TrueNAS SCAL
 
 ---
 
-## Installation Summary
+## Hardware
 
-The installation completed successfully without any issues.
+| Component | Model |
+|----------|-------|
+| CPU | AMD Ryzen 5 5600X |
+| RAM | 64GB DDR4 |
+| Boot Drive | 2TB NVMe SSD |
+| Storage | 2 × 8TB SATA + 2 × 4TB SATA |
 
-After the initial installation I:
+---
 
-- Logged into the Proxmox web interface
-- Configured the no-subscription repository
-- Updated all packages
-- Rebooted the system
+## BIOS Configuration
+
+Before installing Proxmox, the following BIOS settings were configured:
+
+- Enabled AMD SVM (Virtualization)
+- Enabled AMD IOMMU
+- Enabled DOCP/XMP memory profile
+- Updated motherboard BIOS to the latest stable version
+- Configured the NVMe SSD as the primary boot device
+
+These settings ensure virtualization support and prepare the system for future hardware passthrough.
+
+---
+
+## Installation
+
+- Installed Proxmox VE
+- Configured networking
+- Logged into the web interface
 - Verified network connectivity
-- Uploaded the installation ISOs for future virtual machines
 
 ---
 
 ## Repository Configuration
 
-Since this project does not use a Proxmox Enterprise subscription, the default enterprise repository was replaced with the official no-subscription repository.
+Since this homelab does not use a Proxmox Enterprise subscription, the default enterprise repository was replaced with the official no-subscription repository.
 
-To simplify the process, I used the **Proxmox VE Post Install** script maintained by the community.
-
-The script automatically:
+To simplify the process, I used the **Proxmox VE Post Install Script**, which:
 
 - Disabled the enterprise repository
-- Enabled the official Proxmox no-subscription repository
+- Enabled the official no-subscription repository
 - Refreshed package sources
 - Applied recommended post-installation configuration
 
-This produced the same end result as performing the configuration manually while reducing the chance of mistakes.
+Afterward, the system was fully updated.
 
 ---
 
-## Results
+## Updates
 
-After updating and rebooting:
+The initial package update completed successfully without any issues.
 
-- Proxmox booted successfully
-- The web interface remained accessible
-- Package updates completed successfully
-- The system was ready for virtual machine deployment
+After rebooting:
 
-No issues were encountered during this phase.
+- Proxmox booted normally.
+- The web interface remained accessible.
+- Package repositories functioned correctly.
+- The host was ready for virtual machine deployment.
+
+---
+
+## Virtual Machines
+
+The first virtual machine deployed was:
+
+| VM | Purpose |
+|----|---------|
+| TrueNAS SCALE | Storage Server |
 
 ---
 
@@ -68,10 +95,11 @@ No issues were encountered during this phase.
 During this phase I learned:
 
 - Basic Proxmox administration
+- BIOS virtualization settings
 - Repository management
 - Package updates
 - Initial host configuration
-- Preparing a virtualization environment
+- Preparing a virtualization platform
 
 ---
 
@@ -79,4 +107,30 @@ During this phase I learned:
 
 - Deploy TrueNAS SCALE
 - Configure ZFS mirror pools
-- Deploy the Docker virtual machine
+- Deploy Docker VM
+
+## Troubleshooting
+
+### Virtualization Disabled
+
+**Problem**
+
+The TrueNAS virtual machine failed to start due to virtualization not being enabled.
+
+**Solution**
+
+Enabled AMD SVM virtualization in the motherboard BIOS.
+
+---
+
+### Repository Configuration
+
+**Problem**
+
+The default Proxmox Enterprise repository requires a subscription.
+
+**Solution**
+
+Used the Proxmox VE Post Install Script to disable the enterprise repository and enable the official no-subscription repository.
+
+Verified that package updates completed successfully afterward.
