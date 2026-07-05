@@ -103,6 +103,26 @@ During this phase I learned:
 
 ---
 
+## Remote Access
+
+To manage the homelab remotely during the initial deployment, I installed **Tailscale** directly on the Proxmox host.
+
+This allowed secure remote administration of the hypervisor without exposing the Proxmox web interface directly to the internet.
+
+---
+
+## Temporary Access to TrueNAS
+
+During the initial TrueNAS deployment, I needed to access the TrueNAS web interface before the storage pools could be created.
+
+Since Tailscale had not yet been installed inside the TrueNAS VM, I temporarily configured a port forwarding rule on my router to access the TrueNAS web interface remotely.
+
+This was a temporary solution used only during the initial setup.
+
+Once the storage pools are configured and the system is fully operational, the port forwarding rule will be removed and replaced with Tailscale running directly inside the TrueNAS VM.
+
+This approach keeps all management traffic within the private Tailscale network and avoids exposing administrative services to the public internet.
+
 ## Next Steps
 
 - Deploy TrueNAS SCALE
