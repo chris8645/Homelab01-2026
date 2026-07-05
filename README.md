@@ -269,9 +269,9 @@ Each deployment includes:
 
 ---
 
-# 🚧 Current Progress
+## 🚧 Current Progress
 
-**Status:** 🟡 Building
+**Status:** 🟡 Storage Configuration
 
 | Task | Status |
 |------|--------|
@@ -279,12 +279,12 @@ Each deployment includes:
 | Hardware Purchased | ✅ Complete |
 | Server Assembly | ✅ Complete |
 | BIOS Updated | ✅ Complete |
-| Proxmox Installed | ✅ Complete |
-| Networking Configured | ✅ Complete |
-| TrueNAS Deployment | ⏳ Pending |
-| Docker Deployment | ⏳ Pending |
-
----
+| Proxmox VE Installed | ✅ Complete |
+| No-Subscription Repository Configured | ✅ Complete |
+| Tailscale Installed on Proxmox | ✅ Complete |
+| TrueNAS SCALE Installed | ✅ Complete |
+| Storage Pools | 🟡 In Progress |
+| Docker VM | ⏳ Pending |
 
 # 📅 Project Timeline
 
